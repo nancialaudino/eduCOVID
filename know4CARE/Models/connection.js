@@ -1,16 +1,15 @@
-const mysql = require('mysql');
 const util = require('util');
+const mysql = require('mysql');
 
-/*
 var pool = mysql.createPool({
     connectionLimit: 20,
     host: 'remotemysql.com',
-    user: ,
-    password: ,
-    database: ,
-    port: 
+    user: 'uQN7IdE9Zj',
+    password: 'RlM979qgAW',
+    database: 'uQN7IdE9Zj',
+    port: 3306
 });
-*/
+
 
 // Ping database to check for common exception errors.
 pool.getConnection((err, connection) => {

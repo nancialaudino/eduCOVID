@@ -1,18 +1,31 @@
-function login() {
 
-    let input_username = document.getElementById("username").value;
-    let input_password = document.getElementById("password").value;
+async function login() {
 
-    if (input_username != "" && input_password != "") {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
-        if (input_username === "admin" && input_password == "admin") {
-            alert("Autenticado com sucesso!")
-        } else {
-            alert("Username ou Password incorretos!")
+    if (username != "" && password != "") {
+
+        try {
+
+            let user = await $.ajax({
+                url: "/api/users/login?email="+username+"&contribuinte="+password,
+                method: "get",
+                dataType: "json"
+            });
+
+            alert("autenticado com sucesso!");
+
+        } catch(err) {
+            console.log(err);
+            if (err.status == 404) {
+                alert(err.responseJSON.msg);
+            }
         }
 
     } else {
-        alert("Preenche os campos por favor!")
+        alert("Preencha os campos!")
     }
+
 
 }
