@@ -14,6 +14,12 @@ async function login() {
                 dataType: "json"
             });
 
+            let categoria = user.categoria_id;
+
+            if (categoria === 1) {
+                window.location = "perfilAdmin.html";
+            }
+
             alert("autenticado com sucesso!");
 
         } catch(err) {
