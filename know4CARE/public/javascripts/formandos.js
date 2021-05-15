@@ -28,7 +28,8 @@ async function loadFormandos() {
             html += "<td>"+formando.nome+"</td>"
             html += "<td>"+formando.data_nasc+"</td>"
             html += "<td>"+formando.email+"</td>"
-            html += "<td>"+formando.contribuinte+"</td>"
+            html += "<td>"+formando.codigo+"</td>"
+            html += "<td>"+formando.instituicao+"</td>"
             html += "<td><button type='button' class='btn btn-primary' onclick='abrirModelEditarFormando("+formando.id_user+");'><i class='fas fa-edit'></i></button> <button type='button' class='btn btn-danger' onclick='removerFormando("+formando.id_user+");'><i class='far fa-trash-alt'></i></button></td>";
 
         }
@@ -49,15 +50,17 @@ async function addFormando() {
     let nome = document.getElementById("nome").value;
     let email = document.getElementById("email").value;
     let nascimento = document.getElementById("nascimento").value;
-    let contribuinte = document.getElementById("contribuinte").value;
+    let codigo = document.getElementById("codigo").value;
+    let instituicao = document.getElementById("instituicao").value;
 
-    if (nome != "" && email != "" && nascimento != "" && contribuinte != "") {
+    if (nome != "" && email != "" && nascimento != "" && codigo != "" && instituicao!="") {
 
         let data = {
             nome: nome,
             email: email,
             data_nasc: nascimento,
-            contribuinte: contribuinte
+            codigo: codigo,
+            instituicao:instituicao
         }
 
         try {
@@ -108,13 +111,14 @@ async function editarFormando(id) {
     let nome = document.getElementById("nome").value;
     let email = document.getElementById("email").value;
     let nascimento = document.getElementById("nascimento").value;
-    let contribuinte = document.getElementById("contribuinte").value;
+    let codigo = document.getElementById("codigo").value;
 
     let data = {
         nome: nome,
         email: email,
         data_nasc: nascimento,
-        contribuinte: contribuinte
+        codigo: codigo,
+        instituicao:instituicao
     }
 
     try {
@@ -143,7 +147,8 @@ function abrirAdicionarFormando() {
     document.getElementById("nome").value = "";
     document.getElementById("nascimento").value = "";
     document.getElementById("email").value = "";
-    document.getElementById("contribuinte").value = "";
+    document.getElementById("codigo").value = "";
+    document.getElementById("instituicao").value = "";
 
     document.getElementById("modalTitle").innerHTML = "Adicionar Formando";
     let btnModal = document.getElementById("btn-modal");
@@ -168,7 +173,8 @@ async function abrirModelEditarFormando(id) {
         document.getElementById("nome").value = formando.nome;
         document.getElementById("nascimento").value = formando.data_nasc;
         document.getElementById("email").value = formando.email;
-        document.getElementById("contribuinte").value = formando.contribuinte;
+        document.getElementById("codigo").value = formando.codigo;
+        document.getElementById("instituicao").value = formando.instituicao;
         
 
     } catch(err) {

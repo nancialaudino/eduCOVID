@@ -9,7 +9,7 @@ async function login() {
         try {
 
             let user = await $.ajax({
-                url: "/api/users/login?email="+username+"&contribuinte="+password,
+                url: "/api/users/login?email="+username+"&codigo="+password,
                 method: "get",
                 dataType: "json"
             });
@@ -18,6 +18,10 @@ async function login() {
 
             if (categoria === 1) {
                 window.location = "perfilAdmin.html";
+            }
+            else if (categoria === 2) {
+                sessionStorage.setItem("user", JSON.stringify(user));
+                window.location = "catalogoFormacoes.html";
             }
 
             alert("autenticado com sucesso!");

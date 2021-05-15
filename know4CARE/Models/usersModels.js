@@ -5,8 +5,8 @@ var pool = require("./connection");
 /* login  */
 module.exports.login = async function(user) {
     try {
-        let sql = "SELECT * FROM Utilizador WHERE email = ? AND contribuinte = ?";
-        let utilizador = await pool.query(sql,[user.email, user.contribuinte] );
+        let sql = "SELECT * FROM Utilizador WHERE email = ? AND codigo = ?";
+        let utilizador = await pool.query(sql,[user.email, user.codigo] );
         if (utilizador.length > 0) {
             return {status: 200, data: utilizador[0]};
         }
@@ -21,7 +21,7 @@ module.exports.login = async function(user) {
 
 module.exports.loadFormandos = async function() {
     try {
-        let sql = "SELECT id_user, nome, DATE_FORMAT(data_nasc, '%d-%m-%y') AS data_nasc, email, contribuinte FROM Utilizador WHERE categoria_id = 4";
+        let sql = "SELECT id_user, nome, DATE_FORMAT(data_nasc, '%d-%m-%y') AS data_nasc, email, codigo, instituicao FROM Utilizador WHERE categoria_id = 2";
         let utilizador = await pool.query(sql);
         if (utilizador.length > 0) {
             return {status: 200, data: utilizador};
@@ -37,8 +37,8 @@ module.exports.loadFormandos = async function() {
 
 module.exports.addFormando = async function(formando) {
     try {
-        let sql = "INSERT INTO Utilizador(nome, data_nasc, email, contribuinte, categoria_id) VALUES (?,?,?,?,2)";
-        let utilizador = await pool.query(sql, [formando.nome, formando.data_nasc, formando.email, formando.contribuinte]);
+        let sql = "INSERT INTO Utilizador(nome, data_nasc, email, codigo,instituicao, categoria_id) VALUES (?,?,?,?,?,2)";
+        let utilizador = await pool.query(sql, [formando.nome, formando.data_nasc, formando.email, formando.codigo,formando.instituicao]);
         return {status: 200, data: utilizador};
     } catch(err) {
         console.log(err);
@@ -59,8 +59,8 @@ module.exports.removerFormando = async function(id) {
 
 module.exports.editarFormando = async function(formando) {
     try {
-        let sql = "UPDATE Utilizador SET nome = COALESCE(?,nome), data_nasc = COALESCE(?,data_nasc), email = COALESCE(?,email), contribuinte = COALESCE(?,contribuinte) WHERE id_user = ?";
-        let utilizador = await pool.query(sql, [formando.nome, formando.data_nasc, formando.email, formando.contribuinte, formando.id]);
+        let sql = "UPDATE Utilizador SET nome = COALESCE(?,nome), data_nasc = COALESCE(?,data_nasc), email = COALESCE(?,email), codigo = COALESCE(?,codigo), instituicao = COALESCE(?,instituicao) WHERE id_user = ?";
+        let utilizador = await pool.query(sql, [formando.nome, formando.data_nasc, formando.email, formando.codigo, formando.instituicao, formando.id]);
         return {status: 200, data: utilizador};
     } catch(err) {
         console.log(err);
@@ -70,7 +70,7 @@ module.exports.editarFormando = async function(formando) {
 
 module.exports.getByIdFormando = async function(id) {
     try {
-        let sql = "SELECT id_user, nome, DATE_FORMAT(data_nasc, '%Y-%m-%d') AS data_nasc, email, contribuinte FROM Utilizador WHERE id_user = ?";
+        let sql = "SELECT id_user, nome, DATE_FORMAT(data_nasc, '%Y-%m-%d') AS data_nasc, email, codigo, instituicao FROM Utilizador WHERE id_user = ?";
         let utilizador = await pool.query(sql, [id]);
         if (utilizador.length > 0) {
             return {status: 200, data: utilizador[0]};
