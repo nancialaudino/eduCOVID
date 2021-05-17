@@ -1,5 +1,6 @@
 
 var user = JSON.parse(sessionStorage.getItem("user"));
+let id_acao = sessionStorage.getItem("id_acao");
 
 window.onload = function () {
 
@@ -22,8 +23,7 @@ async function loadCatalogo() {
 
         let html = "";
         for (let formacao of formacoes) {
-
-            html += "<div class='col mb-4' style='cursor: pointer;'>";
+            html += "<div class='col mb-4' style='cursor: pointer;' onclick='abrirFormacao("+formacao.nome+")'>";
             html += "<div class='card h-100'>";
             html += "<img src='"+formacao.imagem+"' class='card-img-top'>";
             html += "<div class='card-body'>";
@@ -32,13 +32,31 @@ async function loadCatalogo() {
             html += "</div>";
             html += "</div>";
             html += "</div>";
-
         }
 
         document.getElementById("listaFormacoes").innerHTML = html;
+        
 
     } catch(err) {
         console.log(err);
     }
 
+
+}
+
+/*
+function verFormacao(id_acao) {
+        for (i = 0; i < document.getElementsById('listaFormacoes').length; i++) {
+            if (document.getElementsById('listaFormacoes')[i].value==id_acao) {
+                return window.location="moduloFormacao.html"
+          
+            }        
+        }
+}
+ */
+
+function verFormacao(id_acao) {
+	sessionStorage.setItem("id_acao", id_acao);
+	window.location = "modulos.html";
+    
 }

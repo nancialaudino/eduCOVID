@@ -1,7 +1,5 @@
-
 //Assim que a página dos formandos carregar
 window.onload = function () {
-
     loadFormandos();
 
 }
