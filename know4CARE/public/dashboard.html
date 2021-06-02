@@ -32,13 +32,14 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <script src="javascripts/moduloFormacao.js"></script>
 
+  <script src="javascripts/dashboard.js"></script>
 
 </head>
 
 <body>
 
+  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
@@ -49,7 +50,6 @@
       <nav id="navbar" class="navbar">     
            
             <ul>
-                <li><a href="dashboard.html"><span>Dashboard</span></a></li>
                 <li><a href="index.html"><span>Página Inicial</span></a></li>
                 <li><a href="#"><span>Comunidade</span></a></li>
                 <li class="dropdown"><a href="#"><span id="username"></span> <i class="fas fa-user"></i></a>
@@ -72,42 +72,62 @@
     <div class="row">
         <div class="col-4">
             <div class="list-group" id="list-tab" role="tablist">
-              <h5 style='color: #124265'><i class="fas fa-book-open" ></i></a> As minhas Formações</h5>
-              <section id="minhasFormacoes" class="m-0 p-0"></section>
+              <div class="list-group" id="list-tab" role="tablist">
+                <h4 style='color: #124265'><i class="fas fa-lightbulb"></i> Dashboard</h4>
+                <h5 style='color: #124265'><i class="fas fa-book-open"></i></a> As minhas Formações</h5>
+                <section id="minhasFormacoes" class="m-0 p-0"></section>
+              </div>
             </div>
           </div>
           <div class="col-8">
-            
-            <div class="section-title" style="border-left: 1px solid #124265;">
-              <div style="margin-left: 50px;">
-                <h2 style="text-align: left;" id="titulo"></h2>
-                <p style="text-align: left;" id="descricao"></p>
-              </div>
-            </div>
+            <div class="row row-cols-2 row-cols-md-2"> 
 
-            <section id="about-video" class="about-video"> 
-              <div div class="container" data-aos="fade-up">
-                <div id="multimedia" class="about-video row justify-content-center">     
-                  <div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100">
-                    <img src="assets/img/clients/covid-19.jpeg" class="img-fluid" alt="">
-                    <a id="video" href="https://www.youtube.com/watch?v=19D22mHnLVw" class="glightbox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
-                  </div>
+              <a class='col mb-4' style='cursor: pointer;' href="catalogoFormacoes.html">
+                <div class='card h-100'>
+                  <img src="images/catalogo.png" class='card-img-top'>
+                    <div class='card-body text-center'>
+                      <h5 class='card-title text-dark'>Catalogo de Formações</h5>
+                      <p class='card-text'></p>
+                    </div>
                 </div>
-              </div>
-            </section>
+              </a>  
+              
+              <a class='col mb-4' style='cursor: pointer;' href="minhasFormacoes.html">
+                <div class='card h-100'>
+                  <img src="images/iniciadas.png" class='card-img-top'>
+                    <div class='card-body text-center'>
+                      <h5 class='card-title text-dark'>Formações Iniciadas</h5>
+                      <p class='card-text'></p>
+                    </div>
+                </div>
+              </a>  
 
-            <div class="section-title"> 
-              <h2><a a class= "getstarted scrollto" href="catalogoFormacoes.html">Sair</a></h2>
+              <a class='col mb-4' style='cursor: pointer;' href="">
+                <div class='card h-100'>
+                  <img src="images/Produtividade.png" class='card-img-top'>
+                    <div class='card-body text-center'>
+                      <h5 class='card-title text-dark'>Produtividade</h5>
+                      <p class='card-text'></p>
+                    </div>
+                </div>
+              </a>  
+
+              <a class='col mb-4' style='cursor: pointer;' href="">
+                <div class='card h-100'>
+                  <img src="images/tarefas.png" class='card-img-top'>
+                    <div class='card-body text-center'>
+                      <h5 class='card-title text-dark'>Tarefas</h5>
+                      <p class='card-text'></p>
+                    </div>
+                </div>
+              </a>  
+
             </div>
-
+              
           </div>
     </div>
   </section>
     
-       
-
-
-
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
@@ -122,6 +142,5 @@
   <script src="assets/js/main.js"></script>
 
 </body>
-
 
 </html>

@@ -84,4 +84,18 @@ module.exports.getByIdFormando = async function(id) {
     }
 }
 
-
+module.exports.getFormacoesUtilizador = async function(id) {
+    try {
+        let sql = "SELECT F.id_acao, F.nome, F.estado, F.imagem FROM AcaoFormativa F, formacaoUtilizador U WHERE F.id_acao = U.id_formacao AND U.id_formando = ?";
+        let formacoes = await pool.query(sql, [id]);
+        if (formacoes.length > 0) {
+            return {status: 200, data: formacoes};
+        }
+        else {
+            return {status: 404, data: {msg: "Não está a participar em nenhuma formação"}};
+        } 
+    } catch(err) {
+        console.log(err);
+        return {status: 500, data: err};
+    }
+}

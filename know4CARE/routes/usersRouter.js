@@ -42,4 +42,10 @@ router.get('/formandos/:id', async function(req, res, next) {
   res.status(result.status).send(result.data);
 });
 
+router.get('/formandos/:id/formacoes', async function(req, res, next) {
+  let id = req.params.id;
+  let result = await userModel.getFormacoesUtilizador(id);
+  res.status(result.status).send(result.data);
+});
+
 module.exports = router;

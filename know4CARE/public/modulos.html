@@ -9,12 +9,17 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -27,22 +32,34 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <script src="javascripts/modulos.js"></script>
 
 
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
       <h1 class="logo"><a href="index.html"><img src="images/logo.png" width="90"/></a></h1>
-   
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">     
+           
+            <ul>
+                <li><a href="dashboard.html"><span>Dashboard</span></a></li>
+                <li><a href="index.html"><span>Página Inicial</span></a></li>
+                <li><a href="#"><span>Comunidade</span></a></li>
+                <li class="dropdown"><a href="#"><span id="username"></span> <i class="fas fa-user"></i></a>
+                  <ul>
+                    <li><a href="#">Definições</a></li>
+                    <li><a href="#">Logout</a></li>
+                  </ul>
+                </li>
+            </ul>
 
-          
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
@@ -50,13 +67,13 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
+  
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="section-title">
-            <h1>Gestão do COVID19 nas ERPI</h1>
-            <h4>Os coronavírus são um grupo de vírus que podem causar infeções nas pessoas. Normalmente estas infeções estão associadas ao sistema respiratório, podendo ser parecidas a uma gripe comum ou evoluir para uma doença mais grave, como pneumonia.
-                Uma epidemia é quando uma doença ocorre com frequência invulgar numa determinada região e por um período limitado. Já a pandemia é uma epidemia que se alastra ao mesmo tempo em vários países.</h4>
+            <h1 id="titulo"></h1>
+            <h4 id="descricao"></h4>
             </div>
       </div> 
     </div>
@@ -68,29 +85,7 @@
             <section id="faq" class="faq section-bg">
               <div class="container" data-aos="fade-up">
               <div class="faq-list">
-                <ul>
-                  <li data-aos="fade-up">
-                    <i class="bx bx-help-circle "></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Módulo 1 - O vírus <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
-                      <p>Módulo Obrigatório</p>
-                      <p>Duração Total: 140h</p>
-                    </div>
-                  </li>
-                  <li data-aos="fade-up">
-                    <i class="bx bx-help-circle "></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Módulo 2 - Higienização <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
-                      <p>Módulo Obrigatório</p>
-                      <p>Duração Total: 48h</p>
-                    </div>
-
-                    <li data-aos="fade-up">
-                      <i class="bx bx-help-circle "></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Módulo 3 - Cuidados Especiais <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                      <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
-                        <p>Módulo Obrigatório</p>
-                        <p>Duração Total: 60h</p>
-                      </div>  
-                  </li>
-                  </ul>
+                <ul id="modulos"></ul>
               </div>
               </div>
             </section>

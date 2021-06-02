@@ -8,17 +8,16 @@ window.onload = function () {
 
     document.getElementById("username").innerHTML = user.nome;
 
-    loadCatalogo();
+    minhasFormacoes();
 
 }
 
-
-async function loadCatalogo() {
+async function minhasFormacoes() {
 
     try {
 
         let formacoes = await $.ajax({
-            url: "/api/formacoes",
+            url: "/api/users/formandos/"+user.id_user+"/formacoes",
             method: "get",
             dataType: "json"
         });
@@ -30,9 +29,7 @@ async function loadCatalogo() {
             html += "<img src='"+formacao.imagem+"' class='card-img-top'>";
             html += "<div class='card-body'>";
             html += "<h5 class='card-title'>"+formacao.nome+"</h5>";
-            html += "<h5 class='card-title'>Duração: 200h</h5>";
-            html += "<i class='fas fa-hourglass-start'></i>"
-            html += "<p class='card-text'></p>";
+            html += "<p class='card-text'></p>"
             html += "</div>";
             html += "</div>";
             html += "</div>";
@@ -44,7 +41,6 @@ async function loadCatalogo() {
     } catch(err) {
         console.log(err);
     }
-
 
 }
 

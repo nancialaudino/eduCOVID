@@ -1,4 +1,5 @@
 
+
 async function login() {
 
     let username = document.getElementById("username").value;
@@ -13,6 +14,7 @@ async function login() {
                 method: "get",
                 dataType: "json"
             });
+            
 
             let categoria = user.categoria_id;
 
@@ -21,7 +23,7 @@ async function login() {
             }
             else if (categoria === 2) {
                 sessionStorage.setItem("user", JSON.stringify(user));
-                window.location = "catalogoFormacoes.html";
+                window.location = "dashboard.html";
             }
 
             alert("autenticado com sucesso!");
