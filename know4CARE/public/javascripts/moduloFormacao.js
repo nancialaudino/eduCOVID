@@ -1,6 +1,6 @@
 var user = JSON.parse(sessionStorage.getItem("user"));
 var id_acao = sessionStorage.getItem("id_acao");
-var formacao;
+var id_conteudo = sessionStorage.getItem("id_conteudo");
 
 window.onload = async function () {
 
@@ -10,29 +10,15 @@ window.onload = async function () {
 
     try {
 
-        formacao = await $.ajax({
-            url: "/api/formacoes/formacao/"+id_acao,
-            method: "get",
-            dataType: "json"
-        });
-
-
-
-    } catch(err) {
-        console.log(err);
-    }
-
-    try {
-
-        let modulo = await $.ajax({
-            url: "/api/formacoes/modulo/"+formacao.modulos[0].id_modulo+"/conteudo",
+        let conteudo = await $.ajax({
+            url: "/api/conteudos/"+id_conteudo,
             method: "get",
             dataType: "json"
         });
         
-        document.getElementById("titulo").innerHTML = "Módulo " + modulo.modulo_id + " - " + modulo.titulo;
-        document.getElementById("descricao").innerHTML = modulo.texto;
-        document.getElementById("video").href = modulo.linkVideo;
+        document.getElementById("titulo").innerHTML = "Módulo " + conteudo.modulo_id + " - " + conteudo.titulo;
+        document.getElementById("descricao").innerHTML = conteudo.texto;
+        document.getElementById("video").href = conteudo.linkVideo;
         
 
     } catch(err) {
@@ -54,7 +40,7 @@ async function loadMinhasFormacoes() {
         let html = "";
         for (let formacao of formacoes) {
             html += "<details>";
-            html += "<summary style='color: #124265'>"+formacao.nome+"</summary>";
+            html += "<summary style='color: #124265'><span onclick='formacaoAbout("+formacao.id_acao+");'>"+formacao.nome+"</span></summary>";
 
             try {
 
@@ -66,11 +52,12 @@ async function loadMinhasFormacoes() {
         
                 for (let modulo of formacaoInfo.modulos) {
 
+
                     html += "<details style='margin: 0; padding: 0; margin-left: 10px;'>";
                     html += "<summary style='color: #124265'>"+modulo.nome+"</summary>";
                     html += "<ul>";
                     html += "<li style='margin: 0; padding: 0; margin-left: 10px;'>Objetivo</li>";
-                    html += "<li style='margin: 0; padding: 0; margin-left: 10px;'>Conteúdo</li>";
+                    html += "<li onclick='loadConteudos("+modulo.modulo_id+");' style='margin: 0; padding: 0; margin-left: 10px; cursor: pointer;'>Conteudos</li>";
                     html += "<li style='margin: 0; padding: 0; margin-left: 10px;'><a href='quiz.html'>Quiz</a></li>";
                     html += "</ul>";
                     html += "</details>";
@@ -92,5 +79,53 @@ async function loadMinhasFormacoes() {
         console.log(err);
     }
 
+
+}
+
+function formacaoAbout(id) {
+    sessionStorage.setItem("id_acao", id);
+	window.location = "modulos.html";    
+}
+
+function abrirConteudo(id) {
+
+    sessionStorage.setItem("id_conteudo", id);
+    window.location = "moduloFormacao.html";
+
+}
+
+async function loadConteudos(id) {
+
+    document.getElementById("conteudos").style.display = "block";
+    document.getElementById("dashboard").style.display = "none";
+
+    try {
+
+        let conteudos = await $.ajax({
+            url: "/api/formacoes/modulo/"+id+"/conteudos",
+            method: "get",
+            dataType: "json"
+        });
+
+        let html = "";
+        for (let conteudo of conteudos) {
+
+            html += "<li data-aos='fade-up'>";
+            html += "<i fas fa-check-circle'></i> <a data-bs-toggle='collapse' class='collapse' data-bs-target='#faq-list-"+conteudo.id_conteudo+"'>Módulo "+conteudo.modulo_id+ " - "+ conteudo.titulo+"<i class='bx bx-chevron-down icon-show'></i><i class='bx bx-chevron-up icon-close'></i></a>";
+            html += "<div id='faq-list-"+conteudo.id_conteudo+"' class='collapse show' data-bs-parent='.faq-list'>";
+            html += "<p>Objetivo:</p>";
+            html += "<p>Horas:</p>";
+            html += "<button onclick='abrirConteudo("+conteudo.id_conteudo+");'>Ver</button>";
+            html += "</div>";
+            html += "</li>";
+
+        }
+
+        document.getElementById("conteudos-lista").innerHTML = html;
+
+
+    } catch(err) {
+        console.log(err);
+    }
 
 }

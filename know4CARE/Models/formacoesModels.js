@@ -33,11 +33,23 @@ module.exports.getFormacao = async function(id_formacao) {
 
 }
 
-module.exports.getConteudo = async function(id_modulo) {
+module.exports.getConteudos = async function(id_modulo) {
     try {
         let sql = "SELECT * FROM conteudo WHERE modulo_id = ?"
-        let modulo = await pool.query(sql, [id_modulo]);
-        return {status:200, data: modulo[0]};
+        let conteudos = await pool.query(sql, [id_modulo]);
+        return {status:200, data: conteudos};
+    } catch(err) {
+        console.log(err);
+        return {status:500, data: err};
+    }
+
+}
+
+module.exports.partiparFormacao = async function(body) {
+    try {
+        let sql = "INSERT INTO formacaoUtilizador(id_formando, id_formacao) VALUES(?,?)"
+        let result = await pool.query(sql, [body.id_formando, body.id_formacao]);
+        return {status:200, data: result};
     } catch(err) {
         console.log(err);
         return {status:500, data: err};

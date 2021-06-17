@@ -2,9 +2,73 @@ var user = JSON.parse(sessionStorage.getItem("user"));
 
 window.onload = async function () {
 
+    document.getElementById("username").innerHTML = user.nome;
+    chart1();
+    chart2();
     loadMinhasFormacoes();
 
-    document.getElementById("username").innerHTML = user.nome;
+}
+
+function chart1() {
+
+    
+    var ctx = document.getElementById('myChart1').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['dads', 'dads', 'aas', 'dfs', 'fgd'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    '#22CFCF',
+                    '#36A2EB',
+                    '#FF6384',
+                    '#FF9F40',
+                    '#FFCD56'
+                ]
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+}
+
+function chart2() {
+
+    
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Rkkgd', 'Bfkgd', 'Ygdgd', 'Grgdg', 'Pgd'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2],
+                backgroundColor: [
+                    '#22CFCF',
+                    '#36A2EB',
+                    '#FF6384',
+                    '#FF9F40',
+                    '#FFCD56'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
 
 }
 
@@ -21,7 +85,7 @@ async function loadMinhasFormacoes() {
         let html = "";
         for (let formacao of formacoes) {
             html += "<details>";
-            html += "<summary style='color: #124265'>"+formacao.nome+"</summary>";
+            html += "<summary style='color: #124265'><span onclick='formacaoAbout("+formacao.id_acao+");'>"+formacao.nome+"</span></summary>";
 
             try {
 
@@ -33,11 +97,12 @@ async function loadMinhasFormacoes() {
         
                 for (let modulo of formacaoInfo.modulos) {
 
+
                     html += "<details style='margin: 0; padding: 0; margin-left: 10px;'>";
                     html += "<summary style='color: #124265'>"+modulo.nome+"</summary>";
                     html += "<ul>";
                     html += "<li style='margin: 0; padding: 0; margin-left: 10px;'>Objetivo</li>";
-                    html += "<li style='margin: 0; padding: 0; margin-left: 10px;'>Conteudo</li>";
+                    html += "<li onclick='loadConteudos("+modulo.modulo_id+");' style='margin: 0; padding: 0; margin-left: 10px; cursor: pointer;'>Conteudos</li>";
                     html += "<li style='margin: 0; padding: 0; margin-left: 10px;'><a href='quiz.html'>Quiz</a></li>";
                     html += "</ul>";
                     html += "</details>";
@@ -59,5 +124,53 @@ async function loadMinhasFormacoes() {
         console.log(err);
     }
 
+
+}
+
+function formacaoAbout(id) {
+    sessionStorage.setItem("id_acao", id);
+	window.location = "modulos.html";    
+}
+
+async function loadConteudos(id) {
+
+    document.getElementById("conteudos").style.display = "block";
+    document.getElementById("dashboard").style.display = "none";
+
+    try {
+
+        let conteudos = await $.ajax({
+            url: "/api/formacoes/modulo/"+id+"/conteudos",
+            method: "get",
+            dataType: "json"
+        });
+
+        let html = "";
+        for (let conteudo of conteudos) {
+
+            html += "<li data-aos='fade-up'>";
+            html += "<i fas fa-check-circle'></i> <a data-bs-toggle='collapse' class='collapse' data-bs-target='#faq-list-"+conteudo.id_conteudo+"'>Módulo "+conteudo.modulo_id+ " - "+ conteudo.titulo+"<i class='bx bx-chevron-down icon-show'></i><i class='bx bx-chevron-up icon-close'></i></a>";
+            html += "<div id='faq-list-"+conteudo.id_conteudo+"' class='collapse show' data-bs-parent='.faq-list'>";
+            html += "<p>Objetivo:</p>";
+            html += "<p>Horas:</p>";
+            html += "<button onclick='abrirConteudo("+conteudo.id_conteudo+");'>Ver</button>";
+            html += "</div>";
+            html += "</li>";
+
+        }
+
+        document.getElementById("conteudos-lista").innerHTML = html;
+
+
+    } catch(err) {
+        console.log(err);
+    }
+
+}
+
+function abrirConteudo(id) {
+
+    sessionStorage.setItem("id_conteudo", id);
+    window.location = "moduloFormacao.html";
 
 }

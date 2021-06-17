@@ -34,6 +34,7 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <script src="javascripts/dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -51,6 +52,7 @@
            
             <ul>
                 <li><a href="index.html"><span>Página Inicial</span></a></li>
+                <li><a href="catalogoFormacoes.html"><span>Catálogo</span></a></li>
                 <li><a href="#"><span>Comunidade</span></a></li>
                 <li class="dropdown"><a href="#"><span id="username"></span> <i class="fas fa-user"></i></a>
                   <ul>
@@ -79,49 +81,69 @@
               </div>
             </div>
           </div>
-          <div class="col-8">
+
+          <div id="conteudos" class="col-8" style="display: none;">
+
+            <section id="faq" class="faq p-0">
+              <div class="container" data-aos="fade-up">
+                <div class="faq-list">
+                  <ul id="conteudos-lista"></ul>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <div id="dashboard" class="col-8">
             <div class="row row-cols-2 row-cols-md-2"> 
 
-              <a class='col mb-4' style='cursor: pointer;' href="catalogoFormacoes.html">
-                <div class='card h-100'>
-                  <img src="images/catalogo.png" class='card-img-top'>
-                    <div class='card-body text-center'>
-                      <h5 class='card-title text-dark'>Catalogo de Formações</h5>
-                      <p class='card-text'></p>
+              <section id="counts" class="counts w-100 pt-0 mt-0">
+                <div class="container">
+          
+                  <div class="row justify-content-end">
+          
+                    <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                      <div class="count-box">
+                        <span data-purecounter-start="0" data-purecounter-end="95" data-purecounter-duration="2" class="purecounter"></span>
+                        <p>Ações Iniciadas</p>
+                      </div>
                     </div>
-                </div>
-              </a>  
-              
-              <a class='col mb-4' style='cursor: pointer;' href="minhasFormacoes.html">
-                <div class='card h-100'>
-                  <img src="images/iniciadas.png" class='card-img-top'>
-                    <div class='card-body text-center'>
-                      <h5 class='card-title text-dark'>Formações Iniciadas</h5>
-                      <p class='card-text'></p>
+          
+                    <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                      <div class="count-box">
+                        <span data-purecounter-start="0" data-purecounter-end="40" data-purecounter-duration="2" class="purecounter"></span>
+                        <p>Ações Finalizadas</p>
+                      </div>
                     </div>
+          
+                    <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                      <div class="count-box">
+                        <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="2" class="purecounter"></span>
+                        <p>Quizzes Realizados</p>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                      <div class="count-box">
+                        <span data-purecounter-start="0" data-purecounter-end="40" data-purecounter-duration="2" class="purecounter"></span>
+                        <p>Tarefas Finalizadas</p>
+                      </div>
+                    </div>
+          
+                  </div>
+          
                 </div>
-              </a>  
+              </section><!-- fim de sessão -->
 
-              <a class='col mb-4' style='cursor: pointer;' href="">
-                <div class='card h-100'>
-                  <img src="images/Produtividade.png" class='card-img-top'>
-                    <div class='card-body text-center'>
-                      <h5 class='card-title text-dark'>Produtividade</h5>
-                      <p class='card-text'></p>
-                    </div>
-                </div>
-              </a>  
+            </div>
 
-              <a class='col mb-4' style='cursor: pointer;' href="">
-                <div class='card h-100'>
-                  <img src="images/tarefas.png" class='card-img-top'>
-                    <div class='card-body text-center'>
-                      <h5 class='card-title text-dark'>Tarefas</h5>
-                      <p class='card-text'></p>
-                    </div>
-                </div>
-              </a>  
-
+            <div class="row">
+              <div class="col-6">
+                <canvas id="myChart1" width="1000" height="1000"></canvas>
+              </div>
+              <div class="col-6">
+                <canvas id="myChart2"></canvas>
+              </div>
             </div>
               
           </div>

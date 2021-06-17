@@ -32,13 +32,14 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <script src="javascripts/modulos.js"></script>
 
+  <script src="javascripts/modulos.js"></script>
 
 </head>
 
 <body>
 
+  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
@@ -67,39 +68,51 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-      <div class="row justify-content-center">
-        <div class="section-title">
-            <h1 id="titulo"></h1>
-            <h4 id="descricao"></h4>
+
+  <section class="container mt-5">
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+              <div class="list-group" id="list-tab" role="tablist">
+                <h4 style='color: #124265'><i class="fas fa-lightbulb"></i> Dashboard</h4>
+                <h5 style='color: #124265'><i class="fas fa-book-open"></i></a> As minhas Formações</h5>
+                <section id="minhasFormacoes" class="m-0 p-0"></section>
+              </div>
             </div>
-      </div> 
-    </div>
-  </section>     
+          </div>
+          <div class="col-8">
+              
+            <section class="d-flex align-items-center pt-0 mt-0">
+              <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+                <div class="row justify-content-center">
+                  <div class="section-title">
+                      <h1 id="titulo"></h1>
+                      <h4 id="descricao"></h4>
+                  </div>
+                </div> 
+              </div>
+            </section>  
+
             <div class="section-title">
               <h2>Módulos</h2>
               <p>Esta ação de formação está constituída pelos seguintes módulos:</p>
             </div>
-            <section id="faq" class="faq section-bg">
+            <section id="faq" class="faq">
               <div class="container" data-aos="fade-up">
-              <div class="faq-list">
-                <ul id="modulos"></ul>
-              </div>
+                <div class="faq-list">
+                  <ul id="modulos"></ul>
+                </div>
               </div>
             </section>
-
           
-          <div class="section-title"> 
-            <h2><a a class= "getstarted scrollto" href="moduloFormacao.html">Iniciar</a></h2>
-              </div>
+            <div class="section-title"> 
+              <h2 id="btn-iniciar"><a a class= "getstarted scrollto" onclick="iniciarFormacao();">Iniciar</a></h2>
+            </div>
 
+          </div>
+    </div>
+  </section>
     
-       
-
-
-
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
