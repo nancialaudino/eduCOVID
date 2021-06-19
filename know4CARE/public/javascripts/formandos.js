@@ -110,13 +110,14 @@ async function editarFormando(id) {
     let email = document.getElementById("email").value;
     let nascimento = document.getElementById("nascimento").value;
     let codigo = document.getElementById("codigo").value;
+    let instituicao = document.getElementById("instituicao").value;
 
     let data = {
         nome: nome,
         email: email,
         data_nasc: nascimento,
         codigo: codigo,
-        instituicao:instituicao
+        instituicao: instituicao
     }
 
     try {
@@ -191,3 +192,8 @@ async function abrirModelEditarFormando(id) {
 function fecharModal() {
     $('#formandosModal').modal('hide');
 }
+
+function logout() {
+    sessionStorage.clear();
+    window.location = "index.html";
+  }

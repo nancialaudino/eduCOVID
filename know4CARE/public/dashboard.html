@@ -57,7 +57,7 @@
                 <li class="dropdown"><a href="#"><span id="username"></span> <i class="fas fa-user"></i></a>
                   <ul>
                     <li><a href="#">Definições</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li onclick='logout()'><a href="index.html">Logout</a></li>
                   </ul>
                 </li>
             </ul>
@@ -103,29 +103,23 @@
                   <div class="row justify-content-end">
           
                     <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-                      <div class="count-box">
-                        <span data-purecounter-start="0" data-purecounter-end="95" data-purecounter-duration="2" class="purecounter"></span>
-                        <p>Ações Iniciadas</p>
-                      </div>
+                      <div id="acoes_iniciadas" class="count-box"></div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                      <div id="acoes_finalizadas" class="count-box"></div>
                     </div>
           
                     <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
                       <div class="count-box">
-                        <span data-purecounter-start="0" data-purecounter-end="40" data-purecounter-duration="2" class="purecounter"></span>
-                        <p>Ações Finalizadas</p>
-                      </div>
-                    </div>
-          
-                    <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-                      <div class="count-box">
-                        <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="2" class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="2" class="purecounter"></span>
                         <p>Quizzes Realizados</p>
                       </div>
                     </div>
           
                     <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
                       <div class="count-box">
-                        <span data-purecounter-start="0" data-purecounter-end="40" data-purecounter-duration="2" class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="2" class="purecounter"></span>
                         <p>Tarefas Finalizadas</p>
                       </div>
                     </div>

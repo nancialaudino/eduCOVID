@@ -99,3 +99,40 @@ module.exports.getFormacoesUtilizador = async function(id) {
         return {status: 500, data: err};
     }
 }
+
+module.exports.formacoesFinalizadas = async function(id) {
+
+    let lista = [];
+
+    try {
+        let sql = "SELECT * FROM AcaoFormativa A, formacaoUtilizador U WHERE A.id_acao = U.id_formacao AND U.id_formando = ?";
+        let formacoes = await pool.query(sql, [id]);
+
+        if (formacoes.length > 0) {
+
+            for (let formacao of formacoes) {
+
+                sql = "SELECT COUNT(C.id_conteudo) AS conteudosFormacao FROM conteudo C, ModuloFormacao M WHERE M.id_formacao = ? AND M.modulo_id = C.modulo_id";
+                let countConteudosFormacao = await pool.query(sql, [formacao.id_acao]);
+
+                sql = "SELECT COUNT(U.id) AS conteudosVistos FROM conteudoUtilizador U, conteudo C, ModuloFormacao M WHERE U.utilizador_id = ? AND U.conteudo_id = C.id_conteudo AND C.modulo_id = M.modulo_id AND M.id_formacao = ?";
+                let countConteudosFormacaoVistos = await pool.query(sql, [id, formacao.id_acao]);
+
+                if (countConteudosFormacao[0].conteudosFormacao == countConteudosFormacaoVistos[0].conteudosVistos) {
+
+                    lista.push(formacao);
+
+                }
+
+            }
+
+            return {status: 200, data: lista};
+        }
+        else {
+            return {status: 404, data: {msg: "Sem formacoes"}};
+        } 
+    } catch(err) {
+        console.log(err);
+        return {status: 500, data: err};
+    }
+}

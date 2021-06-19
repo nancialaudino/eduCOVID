@@ -87,7 +87,26 @@ function formacaoAbout(id) {
 	window.location = "modulos.html";    
 }
 
-function abrirConteudo(id) {
+async function abrirConteudo(id) {
+
+    let data = {
+        id_utilizador: user.id_user
+    }
+
+    try {
+
+        let formando = await $.ajax({
+            url: "/api/conteudos/"+id+"/visto",
+            method: "post",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "json"
+        });
+
+
+    } catch(err) {
+        console.log(err);
+    }
 
     sessionStorage.setItem("id_conteudo", id);
     window.location = "moduloFormacao.html";

@@ -7,6 +7,21 @@ window.onload = async function () {
     chart2();
     loadMinhasFormacoes();
 
+    try {
+
+        let formacoes = await $.ajax({
+            url: "/api/users/formandos/"+user.id_user+"/formacoes/finalizadas",
+            method: "get",
+            dataType: "json"
+        });
+
+        document.getElementById("acoes_finalizadas").innerHTML = "<span data-purecounter-start='0' data-purecounter-end='"+formacoes.length+"' data-purecounter-duration='2' class='purecounter'>"+formacoes.length+"</span><p>Ações Finalizadas</p>";
+
+
+    } catch(err) {
+        console.log(err);
+    }
+
 }
 
 function chart1() {
@@ -16,7 +31,7 @@ function chart1() {
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['dads', 'dads', 'aas', 'dfs', 'fgd'],
+            labels: ['Conteúdos Vistos', '', 'aas', 'dfs', 'fgd'],
             datasets: [{
                 label: '# of Votes',
                 data: [12, 19, 3, 5, 2, 3],
@@ -82,11 +97,13 @@ async function loadMinhasFormacoes() {
             dataType: "json"
         });
 
+        document.getElementById("acoes_iniciadas").innerHTML = "<span data-purecounter-start='0' data-purecounter-end='"+formacoes.length+"' data-purecounter-duration='2' class='purecounter'>"+formacoes.length+"</span><p>Ações Iniciadas</p>";
+
         let html = "";
         for (let formacao of formacoes) {
+            console.log(formacao);
             html += "<details>";
             html += "<summary style='color: #124265'><span onclick='formacaoAbout("+formacao.id_acao+");'>"+formacao.nome+"</span></summary>";
-
             try {
 
                 let formacaoInfo = await $.ajax({
@@ -168,9 +185,32 @@ async function loadConteudos(id) {
 
 }
 
-function abrirConteudo(id) {
+async function abrirConteudo(id) {
+
+    let data = {
+        id_utilizador: user.id_user
+    }
+
+    try {
+
+        let formando = await $.ajax({
+            url: "/api/conteudos/"+id+"/visto",
+            method: "post",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "json"
+        });
+
+
+    } catch(err) {
+        console.log(err);
+    }
 
     sessionStorage.setItem("id_conteudo", id);
     window.location = "moduloFormacao.html";
 
 }
+
+function logout() {
+    sessionStorage.clear();
+  }
