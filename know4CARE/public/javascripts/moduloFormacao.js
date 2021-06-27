@@ -132,8 +132,6 @@ async function loadConteudos(id) {
             html += "<li data-aos='fade-up'>";
             html += "<i fas fa-check-circle'></i> <a data-bs-toggle='collapse' class='collapse' data-bs-target='#faq-list-"+conteudo.id_conteudo+"'>Módulo "+conteudo.modulo_id+ " - "+ conteudo.titulo+"<i class='bx bx-chevron-down icon-show'></i><i class='bx bx-chevron-up icon-close'></i></a>";
             html += "<div id='faq-list-"+conteudo.id_conteudo+"' class='collapse show' data-bs-parent='.faq-list'>";
-            html += "<p>Objetivo:</p>";
-            html += "<p>Horas:</p>";
             html += "<button onclick='abrirConteudo("+conteudo.id_conteudo+");'>Ver</button>";
             html += "</div>";
             html += "</li>";

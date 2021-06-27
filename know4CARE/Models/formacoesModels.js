@@ -57,5 +57,16 @@ module.exports.partiparFormacao = async function(body) {
 
 }
 
+module.exports.addFormacao = async function(formacao) {
+    try {
+        let sql = "INSERT INTO AcaoFormativa(nome, estado, imagem, descricao, duracao) VALUES (?,'',?,?,?)";
+        let result = await pool.query(sql, [formacao.nome, formacao.imagem, formacao.descricao, formacao.duracao]);
+        return {status: 200, data: result};
+    } catch(err) {
+        console.log(err);
+        return {status: 500, data: err};
+    }
+}
+
 
 

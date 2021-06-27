@@ -3,8 +3,6 @@ var user = JSON.parse(sessionStorage.getItem("user"));
 window.onload = async function () {
 
     document.getElementById("username").innerHTML = user.nome;
-    chart1();
-    chart2();
     loadMinhasFormacoes();
 
     try {
@@ -24,24 +22,31 @@ window.onload = async function () {
 
 }
 
-function chart1() {
+async function chart1(formacoes) {
+    
+    var lformacoes = [];
+    var dformacoes = [];
 
+    for (let i in formacoes) {
+
+        lformacoes.push(formacoes[i].nome);
+        dformacoes.push(formacoes[i].conteudosVistos);
+
+    }
     
     var ctx = document.getElementById('myChart1').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Conteúdos Vistos', '', 'aas', 'dfs', 'fgd'],
+            //vai add o nome das formações em que o formando está inscrito
+            labels: lformacoes,
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    '#22CFCF',
-                    '#36A2EB',
-                    '#FF6384',
-                    '#FF9F40',
-                    '#FFCD56'
-                ]
+                label: 'conteúdos vistos',
+                data: dformacoes, //vai add o nome número de conteúdos vistos
+                backgroundColor: '#22CFCF',
+                borderColor: '#22CFCF',
+                hoverBackgroundColor: '#22CFCF',
+                hoverBorderColor: '#22CFCF'
             }]
         },
         options: {
@@ -62,10 +67,10 @@ function chart2() {
     var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Rkkgd', 'Bfkgd', 'Ygdgd', 'Grgdg', 'Pgd'],
+            labels: ["Total de Horas","Quizzes","Tarefas","Multimédia","Alertas"],
             datasets: [{
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2],
+                data: [1,2,3,4,5],
                 backgroundColor: [
                     '#22CFCF',
                     '#36A2EB',
@@ -91,7 +96,7 @@ async function loadMinhasFormacoes() {
 
     try {
 
-        let formacoes = await $.ajax({
+        var formacoes = await $.ajax({
             url: "/api/users/formandos/"+user.id_user+"/formacoes",
             method: "get",
             dataType: "json"
@@ -101,7 +106,6 @@ async function loadMinhasFormacoes() {
 
         let html = "";
         for (let formacao of formacoes) {
-            console.log(formacao);
             html += "<details>";
             html += "<summary style='color: #124265'><span onclick='formacaoAbout("+formacao.id_acao+");'>"+formacao.nome+"</span></summary>";
             try {
@@ -125,14 +129,16 @@ async function loadMinhasFormacoes() {
                     html += "</details>";
 
                 }
-        
-        
+            
             } catch(err) {
                 console.log(err);
             }
             html += "</details>";
             html += "</details>";
         }
+
+        chart1(formacoes);
+        chart2()
 
         document.getElementById("minhasFormacoes").innerHTML = html;
         

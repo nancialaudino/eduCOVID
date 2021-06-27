@@ -38,6 +38,5 @@ async function login() {
     } else {
         alert("Preencha os campos!")
     }
-
-
+    
 }

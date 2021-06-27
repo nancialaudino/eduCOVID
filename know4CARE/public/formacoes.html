@@ -9,12 +9,17 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -24,7 +29,7 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <script src="javascripts/catalogo.js"></script>
+  <script src="javascripts/formacoes.js"></script>
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -68,6 +73,74 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+            <div class="text-center">
+
+                <div class="btn-div">
+                    <button type="button" class="btn btn-primary" onclick="abrirAdicionarFormacao();"><i class="fas fa-user-plus"></i> Adicionar Formação</button>
+                </div>
+            
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome Ação</th>
+                        <th scope="col" style="width: 60%;">Descrição</th>
+                        <th scope="col">Duração</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="formacoes">
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </section>
+
+
+  <!-- Modal novo formando -->
+  <div class="modal fade" id="formacoesModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button onclick="fecharModal();" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        
+            <div class="form-group">
+                <label for="nome">Nome Ação</label>
+                <input type="text" class="form-control" id="nome" autocomplete="false" placeholder="Nome da ação">
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="email">Imagem</label>
+                <input type="text" class="form-control" id="imagem" autocomplete="false" placeholder="Imagem">
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="nascimento">Descrição</label>
+                <textarea id="descricao" autocomplete="false" rows="4" style="width: 100%;"></textarea>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="contribuinte">Duracão</label>
+                <input type="text" class="form-control" id="duracao" autocomplete="false" placeholder="Duracão">
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button onclick="addFormacao();" id="btn-modal" type="button" class="btn btn-primary">Adicionar Formação</button>
+        </div>
+    </div>
+    </div>
+</div>
        
 
 

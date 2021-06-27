@@ -89,6 +89,15 @@ module.exports.getFormacoesUtilizador = async function(id) {
         let sql = "SELECT F.id_acao, F.nome, F.estado, F.imagem FROM AcaoFormativa F, formacaoUtilizador U WHERE F.id_acao = U.id_formacao AND U.id_formando = ?";
         let formacoes = await pool.query(sql, [id]);
         if (formacoes.length > 0) {
+            //Vai a cada uma das formações que tem e coloca o nr de conteúdos vistos
+            for (let formacao of formacoes) {
+
+                sql = "SELECT COUNT(U.id) AS conteudosVistos FROM conteudoUtilizador U, conteudo C, ModuloFormacao M WHERE U.utilizador_id = ? AND U.conteudo_id = C.id_conteudo AND C.modulo_id = M.modulo_id AND M.id_formacao = ?";
+                let countConteudosFormacaoVistos = await pool.query(sql, [id, formacao.id_acao]);
+                formacao.conteudosVistos = countConteudosFormacaoVistos[0].conteudosVistos;
+
+            }
+
             return {status: 200, data: formacoes};
         }
         else {

@@ -21,10 +21,16 @@ router.get('/modulo/:id/conteudos', async function(req, res, next) {
 });
 
 router.post('/:id/participar', async function(req, res, next) {
-  let id = req.params.id;
-  let body = req.body;
+  let id = req.params.id; 2
+  let body = req.body; 
   body.id_formacao = id;
   let result = await formacoesModel.partiparFormacao(body);
+  res.status(result.status).send(result.data);
+});
+
+router.post('/nova', async function(req, res, next) {
+  let body = req.body;
+  let result = await formacoesModel.addFormacao(body);
   res.status(result.status).send(result.data);
 });
 
